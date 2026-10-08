@@ -1,0 +1,17 @@
+{
+  "name": "JMK 18 Empire Pro",
+  "short_name": "JMK18",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0e14",
+  "theme_color": "#ffcc00",
+  "description": "JMK 18 Empire Pro - business suite and fleet tracking",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%23ffcc00'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='100' font-weight='900' fill='%23000'>18</text></svg>",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

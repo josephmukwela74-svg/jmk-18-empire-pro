@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffcc00" />
+  <meta name="description" content="JMK 18 Empire Pro - 18 businesses, AI tools, fleet tracking and documents" />
+  <link rel="manifest" href="manifest.json" />
+  <title>JMK 18 Empire Pro</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div>⚡ JMK 18 EMPIRE PRO • LUSAKA • <span id="syncStatus" class="sync-status offline">OFFLINE</span></div>
+    <button onclick="saveFile()">💾 Save</button>
+  </div>
+
+  <header class="header">
+    <div class="brand-wrap">
+      <div class="badge18">18</div>
+      <div>
+        <h1>JMK 18 EMPIRE</h1>
+        <small>18 BUSINESSES • 1 LINK • LUSAKA ZAMBIA • 0774399257</small>
+      </div>
+      <span class="ai-badge">✨ AI READY</span>
+    </div>
+    <button class="wabtn" onclick="window.open('https://wa.me/260774399257')">💬 WhatsApp: 0774399257</button>
+  </header>
+
+  <div id="pwaInstall" class="pwa-install hidden">
+    <div>📱 Install this app for offline access</div>
+    <button class="btn btn-primary" onclick="installPWA()">Install App</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('pwaInstall').classList.add('hidden')">✕</button>
+  </div>
+
+  <nav class="tabs">
+    <button class="tabpill active" data-tab="business">🇿🇲 Businesses</button>
+    <button class="tabpill" data-tab="ai">🤖 AI Tools</button>
+    <button class="tabpill" data-tab="fleet">🛰️ Fleet</button>
+    <button class="tabpill" data-tab="docs">📄 Docs</button>
+  </nav>
+
+  <main>
+    <section id="tab-business" class="tab-panel">
+      <div class="section">🔥 TOP SERVICES TODAY</div>
+      <div class="grid">
+        <article class="card" onclick="openTool('receipt')"><div class="price">K50</div><div class="icon">🧾</div><h3>Rent Receipts</h3><p>Professional receipts with Kwacha values and paid stamp.</p><div class="link"><span>Create</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('invoice')"><div class="price">K30</div><div class="icon">📄</div><h3>Invoice Maker</h3><p>Quick invoice generation with totals.</p><div class="link"><span>Create</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('duty')"><div class="price">K150</div><div class="icon">🚗</div><h3>Car Duty Calculator</h3><p>ZRA estimate with customs duty and VAT.</p><div class="link"><span>Calculate</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('affidavit')"><div class="price">K100</div><div class="icon">⚖️</div><h3>Affidavit Draft</h3><p>Legal statement drafts for common cases.</p><div class="link"><span>Draft</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('tenancy')"><div class="price">K150</div><div class="icon">🏘️</div><h3>Tenancy Agreement</h3><p>Lease agreement for landlords and tenants.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('payroll')"><div class="price">K50</div><div class="icon">🧮</div><h3>Payroll Calculator</h3><p>PAYE and NAPSA estimate.</p><div class="link"><span>Calculate</span><span>→</span></div></article>
+      </div>
+    </section>
+
+    <section id="tab-ai" class="tab-panel hidden">
+      <div class="section">🤖 AI TOOLS</div>
+      <div class="grid">
+        <article class="card" onclick="openAI('cv')"><div class="price ai">AI</div><div class="icon">👔</div><h3>CV Generator</h3><p>Generate a polished CV from basic profile data.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openAI('letter')"><div class="price ai">AI</div><div class="icon">✉️</div><h3>Cover Letter</h3><p>Tailored cover letters for real job applications.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openAI('business')"><div class="price ai">AI</div><div class="icon">📈</div><h3>Business Plan</h3><p>Business plan and funding proposal outline.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openAI('proposal')"><div class="price ai">AI</div><div class="icon">💼</div><h3>Proposal Writer</h3><p>Create project proposals with budgets and scope.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openAI('summary')"><div class="price ai">AI</div><div class="icon">📊</div><h3>Text Summary</h3><p>Condense long text into simple key points.</p><div class="link"><span>Summarize</span><span>→</span></div></article>
+        <article class="card" onclick="openAI('translator')"><div class="price ai">AI</div><div class="icon">🌍</div><h3>Translator</h3><p>Translate text between languages.</p><div class="link"><span>Translate</span><span>→</span></div></article>
+      </div>
+    </section>
+
+    <section id="tab-fleet" class="tab-panel hidden">
+      <div class="section">🚛 FLEET GPS</div>
+      <div class="grid">
+        <article class="card live-card" onclick="openFleet()"><div class="price live">LIVE</div><div class="icon">🛰️</div><h3>Fleet GPS Tracking</h3><p>Driver telemetry with local tracking and map.</p><div class="link"><span>Track</span><span>→</span></div></article>
+      </div>
+    </section>
+
+    <section id="tab-docs" class="tab-panel hidden">
+      <div class="section">📄 DOCUMENTS & LEGAL</div>
+      <div class="grid">
+        <article class="card" onclick="openTool('affidavit')"><div class="price">K100</div><div class="icon">⚖️</div><h3>Affidavit Draft</h3><p>Legal summary for lost documents and statements.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('tenancy')"><div class="price">K150</div><div class="icon">🏘️</div><h3>Tenancy Agreement</h3><p>Create rental contracts for your property.</p><div class="link"><span>Generate</span><span>→</span></div></article>
+        <article class="card" onclick="openTool('payroll')"><div class="price">K50</div><div class="icon">🧮</div><h3>Payroll Calculator</h3><p>Simple PAYE and NAPSA estimate.</p><div class="link"><span>Calculate</span><span>→</span></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <strong>JMK 18 EMPIRE PRO</strong> • AI • GPS • OFFLINE READY<br>
+    WhatsApp 0774399257 • Lusaka Zambia
+  </footer>
+
+  <div id="aiModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="aiTitle">AI Tool</h2>
+        <button class="close-btn" onclick="closeAI()">✕</button>
+      </div>
+      <div class="api-key-box">
+        <label>OpenAI Key (optional)</label>
+        <input type="password" id="openaiKey" placeholder="sk-..." />
+        <small>Leave blank to use the offline fallback generator.</small>
+      </div>
+      <div id="aiForm"></div>
+      <button class="btn btn-primary" onclick="runAI()">⚡ Generate</button>
+      <div id="aiOutput" class="output hidden"></div>
+    </div>
+  </div>
+
+  <div id="toolModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="toolTitle">Tool</h2>
+        <button class="close-btn" onclick="closeTool()">✕</button>
+      </div>
+      <div id="toolForm"></div>
+      <button class="btn btn-gold" onclick="generateTool()">⚡ Generate</button>
+      <div id="toolOutput" class="output hidden"></div>
+    </div>
+  </div>
+
+  <div id="gpsFull" class="gps-shell hidden">
+    <div class="gps-header">
+      <div><b>JMK FLEET GPS</b> <small>INDEPENDENT • LIVE RADAR</small> <span class="liveDot"></span></div>
+      <button class="close-btn" onclick="closeFleet()">✕</button>
+    </div>
+    <div class="gps-tabs">
+      <button id="gTabOwner" class="btn btn-primary small" onclick="switchFleet('owner')">👑 OWNER</button>
+      <button id="gTabDriver" class="btn btn-dark small" onclick="switchFleet('driver')">📱 DRIVER</button>
+    </div>
+    <div id="map"></div>
+    <div id="gOwner" class="fleet-panel">
+      <div class="statGrid">
+        <div class="stat"><b>Total Fleet</b><div id="oTotal">0</div></div>
+        <div class="stat"><b>Live Now</b><div id="oLive" style="color:#00ff88;">0</div></div>
+        <div class="stat"><b>Fuel</b><div id="oFuel">0L</div></div>
+        <div class="stat"><b>Alerts</b><div id="oAlert" style="color:#ff4444;">0</div></div>
+      </div>
+      <div id="fleetList"></div>
+      <button class="btn btn-primary" onclick="locateAll()">📍 Locate All</button>
+      <button class="btn btn-gold" onclick="addDemo()">➕ Add Demo Trucks</button>
+    </div>
+    <div id="gDriver" class="fleet-panel hidden">
+      <input id="dPlate" placeholder="Plate e.g. BAE 1234 ZM" />
+      <input id="dDriver" placeholder="Driver Name" />
+      <select id="dRoute">
+        <option>Lusaka → Ndola</option>
+        <option>Lusaka → Kitwe</option>
+        <option>Lusaka → Solwezi</option>
+      </select>
+      <div id="dStatus" class="status-box">Status: Not Tracking</div>
+      <button id="startBtn" class="btn btn-primary" onclick="toggleTrack()">▶️ Start Tracking</button>
+      <button id="stopBtn" class="btn btn-danger hidden" onclick="toggleTrack()">⏹️ Stop Tracking</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
